@@ -27,11 +27,11 @@ var defaultApp = firebase.initializeApp(config);
 /*firebase.auth().signInWithEmailAndPassword("email", "pass");*/
 var database = firebase.database();
 console.log(defaultApp.name);
-function eventFunc() {
+/*function eventFunc() {
   window.location.href = "https://iappstore.cf/app.apk";
 }
 const dlNow = document.getElementById("dlBtn");
-dlNow.addEventListener("click", eventFunc);
+dlNow.addEventListener("click", eventFunc);*/
 const app_ico = document.getElementById("app_icon");
 app_ico.setAttribute("src", "https://play-lh.googleusercontent.com/Q-vjgotAJuTjGpxTBe8SOL5OChmTHhBq7LBsiKFRGFTslqYg1rcXD6wLciJAi__hEONR=w480-h960-r");
 
