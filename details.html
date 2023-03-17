@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+      <!--
+    - google font link
+  -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -22,50 +26,52 @@
       <div class="app-details">
         
         <div class="app-icon">
-      <img src="https://lh3.googleusercontent.com/QGJ4ZRUw46vgq3zSZFxJTTty_1SxSf9XpPUnJhYgk_kc5F5w5E5WQhJ1vbzNLnJsz6E=s180-rw" alt="Gym Time App Icon">
+      <img id="app_icon" src="#" alt="Gym Time App Icon">
     </div>
         <div class="app-info">
-          <h1>Gym Time App</h1>
-          <p>TK Studio.</p>
+          <h1 id="app_title">Gym Time App</h1>
+          <p id="app_dev">TK Studio.</p>
           <div class="app-rating">
         
-            <p>4.5 (3,465 ratings)</p>
+            <p></p>
           </div>
           </div>
       
       </div>
       <ul class="app-details-list">
-        <li><span>Downloads:</span> 1M+</li>
-        <li><span>Likes:</span> 5K+</li>
-        <li><span>Size:</span> 17MB</li>
+      <li>
+        <span>Download:</span>
+        <span id="dlCount">100,000+</span>
+      </li>
+      <li>
+        <span>Reviews:</span>
+        <span id="reviewCount">0</span>
+      </li>
+      <li>
+      <span>Like Count:</span>
+        <span id="likeCount">2,345</span>
+      </li>
       </ul>
              <a href="#" class="download-button">Install</a>
      
       <div class="app-description">
         <h2>About this app</h2>
-        <p>The Gym Time App is designed to help you get the most out of your workouts. With features like workout tracking, progress monitoring, and personalized fitness plans, you'll be able to reach your fitness goals faster than ever before.</p>
+        <p id="desc">The Gym Time App is designed to help you get the most out of your workouts. With features like workout tracking, progress monitoring, and personalized fitness plans, you'll be able to reach your fitness goals faster than ever before.</p>
       </div>
       <div class="app-features">
-        <h2>Features</h2>
-        <ul>
-          <li>Workout tracking</li>
-          <li>Progress monitoring</li>
-          <li>Personalized fitness plans</li>
-          <li>Exercise library</li>
-          <li>Nutrition tracking</li>
-          <li>Community support</li>
-        </ul>
+        <h2>What's New</h2>
+        <p id="whatsN"></p>
       </div>
       <div class="app-reviews">
         <h2>User Reviews</h2>
         <ul>
           <li>
-            <h3>Great app for tracking workouts</h3>
+           
             <p>This app has helped me stay motivated and consistent with my workouts. The workout tracking feature is very useful and easy to use.</p>
             <p><strong>By John D. on March 12, 2023</strong></p>
           </li>
           <li>
-            <h3>Needs improvement</h3>
+            
             <p>The app has some bugs and glitches that need to be fixed. Overall, it's a decent app but could be better.</p>
             <p><strong>By Jane S. on March 15, 2023</strong></p>
           </li>
@@ -74,4 +80,13 @@
       </div>
     </main>
   </body>
+
+  
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+  <script src="js/details.js"></script>
 </html>

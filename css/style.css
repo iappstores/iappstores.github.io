@@ -68,6 +68,9 @@ main {
 
 .app-details-list {
   display: flex;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -86,6 +89,19 @@ main {
 .app-details-list li:last-child {
   margin-right: 0;
 }
+
+.app-details-list span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+
+.app-details-list li img {
+  width: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
 
 .app-details-list span {
   font-weight: bold;
@@ -114,7 +130,7 @@ main {
 }
 
 .app-info h1 {
-  font-size: 36px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
