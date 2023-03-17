@@ -52,8 +52,14 @@ const whatsN = document.getElementById("whatsN");
 const dbRef = firebase.database().ref();
 dbRef.child("Published").child(fetcid).get().then((snapshot) => {
   if (snapshot.exists()) {
-     app_ico.setAttribute("src", snapshot.child("AppIcon").val());
-	 appTitle.textContent = snapshot.child("AppName").val();
+     const icon = snapshot.child("AppIcon").val();
+     
+     if(icon.startsWith("http")){
+         app_ico.setAttribute("src", icon);
+     }else{
+        app_ico.setAttribute("src", "data:image/png;base64,"+icon);
+     }
+     	 appTitle.textContent = snapshot.child("AppName").val();
     appDev.textContent = snapshot.child("Developer").val();
 	likeC.textContent = snapshot.child("Liker").numChildren();
     revC.textContent = snapshot.child("Reviews").numChildren();
