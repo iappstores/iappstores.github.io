@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f6f6f6;
+}
+
+header {
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav li {
+  margin-left: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #ef5350;
+}
+
+main {
+  max-width: 960px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-details {
+  display: flex;
+}
+
+.app-image {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.app-image img {
+  width: 100%;
+}
+
+.app-info {
+  flex: 1;
+}
+
+.app-info h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.app-info p {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.app-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.app-rating img {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.app-rating p {
+  font-size: 16px;
+  color: #666666;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #ef5350;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.download-button:hover {
+  background-color: #d32f2f;
+}
+
+.app-description h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.app-description p {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.app-features h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.app-features ul {
+  list-style: none;
+  margin-left: 20px;
+}
+
+.app-features li {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.app-reviews h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.app-reviews ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.app-reviews li {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.app-reviews h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app-reviews p {
+  font-size: 16px;
+  color: #666666;
+ }
