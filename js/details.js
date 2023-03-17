@@ -9,7 +9,7 @@ console.log(fetcid);
 /*fetcid = "-MupcPNlEFDncBBEuRPu"*/
 
 if(fetcid === null){
-	window.location.href = "index.html"
+	window.location.href = "https://iappstore.cf/index.html"
 }
 
 // Initialize Firebase
