@@ -18,8 +18,10 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo img {
-  width: 100px;
+.logo a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
 }
 
 nav ul {
@@ -49,8 +51,53 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.app-icon img {
+  width: 64px;
+  height: 64px;
+}
+
+.app-info {
+  margin-left: 20px;
+}
+
 .app-details {
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.app-details-list {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #757575;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.app-details-list li {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.app-details-list li:last-child {
+  margin-right: 0;
+}
+
+.app-details-list span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.app-details-list img {
+  margin-right: 5px;
+}
+.app-details-list span {
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .app-image {
@@ -77,35 +124,36 @@ main {
   margin-bottom: 20px;
 }
 
-.app-rating {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
 .app-rating img {
-  width: 100px;
-  margin-right: 10px;
+  width: 80px;
+  height: 16px;
+  margin-bottom: 10px;
 }
 
 .app-rating p {
-  font-size: 16px;
-  color: #666666;
+  font-size: 14px;
+  color: #757575;
 }
 
 .download-button {
-  display: inline-block;
-  padding: 10px 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
   border-radius: 5px;
-  background-color: #ef5350;
-  color: #ffffff;
+  background-color: #4CAF50;
+  color: #fff;
   text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .download-button:hover {
-  background-color: #d32f2f;
+  background-color: #3e8e41;
+}
+
+.app-description {
+  margin-bottom: 20px;
 }
 
 .app-description h2 {
@@ -114,9 +162,9 @@ main {
 }
 
 .app-description p {
-  font-size: 16px;
-  color: #666666;
-  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #757575;
 }
 
 .app-features h2 {
