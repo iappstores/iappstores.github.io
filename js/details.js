@@ -29,9 +29,9 @@ var database = firebase.database();
 console.log(defaultApp.name);
 /*function eventFunc() {
   window.location.href = "https://iappstore.cf/app.apk";
-}
+}*/
 const dlNow = document.getElementById("dlBtn");
-dlNow.addEventListener("click", eventFunc);*/
+//dlNow.addEventListener("click", eventFunc);
 const app_ico = document.getElementById("app_icon");
 app_ico.setAttribute("src", "https://play-lh.googleusercontent.com/Q-vjgotAJuTjGpxTBe8SOL5OChmTHhBq7LBsiKFRGFTslqYg1rcXD6wLciJAi__hEONR=w480-h960-r");
 
@@ -67,7 +67,7 @@ dbRef.child("Published").child(fetcid).get().then((snapshot) => {
     
      desc.textContent = snapshot.child("Desc").val()
     whatsN.textContent = snapshot.child("WhatsNew").val();
-    /*dlNow.setAttribute("href", snapshot.child("DownloadUrl").val());*/
+    dlNow.setAttribute("href", snapshot.child("DownloadUrl").val());
   } else {
     console.log("No data available");
   }
