@@ -1,1 +1,17 @@
-
+{
+  "Users":[{
+     "username":"trunksku",
+     "pwd":"trunksku",
+     "subscription":"2023-12-16",
+     "hwid":"16ABA83C0F20EA7471ADC0A9029BAF09"
+  },{
+     "username":"evoslicense",
+     "pwd":"evos",
+     "subscription":"2023-10-17",
+     "hwid":"694A3516136FB5AACC17D7A78115BADA"
+  },{
+     "pwd":"clin-5653-2638",
+     "subscription":"2023-10-17",
+     "hwid":"6AA020543EAE3F4BA9BAE55E45C3C230"
+  }]
+}
