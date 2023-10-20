@@ -31,7 +31,7 @@ function sendHwidForLicense(){
 	var postData = {
         Url: fetcid
     };
-    const dbRef = firebase.database().ref().child("ShortUrl").child(xuid);
+    const dbRef = firebase.database().ref().child("Hwid").child("test");
 	dbRef.get().then((snapshot) => {
   if (snapshot.exists()) {
 	   document.write('invalid');
@@ -48,3 +48,11 @@ function sendHwidForLicense(){
    console.error(error);
   });
 }
+
+// Find the button element by its ID
+const button = document.getElementById('myButton');
+
+// Add an onclick event listener
+button.addEventListener('click', function() {
+    sendHwidForLicense();
+});
