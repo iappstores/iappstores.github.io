@@ -29,7 +29,7 @@ function generate() {
 function sendHwidForLicense(){
     var xuid = generate();
 	var postData = {
-        Url: fetcid
+        Url: "hello"
     };
     const dbRef = firebase.database().ref().child("Hwid").child("test");
 	dbRef.get().then((snapshot) => {
