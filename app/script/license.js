@@ -37,7 +37,7 @@ function sendHwidForLicense(){
 	   document.write('invalid');
 	 console.log("try again");
   } else {
-   //console.log("No data available");
+   console.log("No data available");
 	dbRef.set(postData);
 	 document.write('https://iearnmo.cf/q?id=${xuid}');
 	 
