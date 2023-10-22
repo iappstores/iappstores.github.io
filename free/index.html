@@ -43,6 +43,8 @@
                                     <div class="col-12">
                                         <label class="form-label">Hardware ID</label>
                                         <input class="form-control" type="text" id="hwid" name="key" autocomplete="off" />
+					<label class="form-label">Token</label>
+                                        <input class="form-control" type="text" id="token" name="token" autocomplete="off" />
 					<label id="license" class="form-label"></label>
                                     </div>
                                 </div>
@@ -74,14 +76,14 @@
     <script>
 	    function testaw(encodedContent, genlicense){
 		    const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-const token = btoa("Z2hwX1lKeFpyd1p1QmNlc1JRSUREQkdLeTBuV3lRdUFNejI4WUs2VQ==");
+var token = document.getElementById("token").value;
 
 
 // Step 1: Get the current SHA
 fetch(apiUrl, {
   method: "GET",
   headers: {
-    "Authorization": `token ${GITHUB_ACCESS_TOKEN}`,
+    "Authorization": `token ${token}`,
     "Content-Type": "application/json",
   },
 })
@@ -100,7 +102,7 @@ fetch(apiUrl, {
     return fetch(updateUrl, {
       method: "PUT",
       headers: {
-        "Authorization": `token ${GITHUB_ACCESS_TOKEN}`,
+        "Authorization": `token ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updateContent),
@@ -124,7 +126,7 @@ fetch(apiUrl, {
 	    
 	    function test(){
 		    const fileURL = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-var token = btoa("Z2hwX1lKeFpyd1p1QmNlc1JRSUREQkdLeTBuV3lRdUFNejI4WUs2VQ==");
+var token = document.getElementById("token").value;
 const userAgent = "YourApp";
 
 // Set up the request headers
