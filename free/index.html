@@ -46,7 +46,7 @@
 					<label class="form-label">Token</label>
                                         <input class="form-control" type="text" id="token" name="token" autocomplete="off" />
 					<label class="form-label">License</label>
-					<input class="form-control" type="text" id="license" name="token" autocomplete="off" />
+					<input class="form-control" type="text" id="license" name="token" autocomplete="off" readonly/>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
@@ -201,13 +201,13 @@ for (let i = 0; i < jsonData.Users.length; i++) {
 	const copyButton = document.getElementById("license");
 copyButton.addEventListener("click", function () {
   // Select the text in the input element
-  inputElement.select();
+  copyButton.select();
 
   // Copy the selected text to the clipboard
   document.execCommand("copy");
 
   // Deselect the input element
-  inputElement.setSelectionRange(0, 0);
+  copyButton.setSelectionRange(0, 0);
 
   // Alert the user that the text has been copied (you can use other UI feedback)
   alert("Text copied to clipboard");
