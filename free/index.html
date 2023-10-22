@@ -43,7 +43,7 @@
                                     <div class="col-12">
                                         <label class="form-label">Hardware ID</label>
                                         <input class="form-control" type="text" id="hwid" name="key" autocomplete="off" />
-					<input class="form-control" type="text" id="mykey" name="key" autocomplete="off" />
+					<label id="license" class="form-label"></label>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
@@ -72,9 +72,9 @@
     <!-- Main JS -->
     <script src="../app/script/main.js"></script>
     <script>
-	    function testaw(encodedContent){
+	    function testaw(encodedContent, genlicense){
 		    const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-const GITHUB_ACCESS_TOKEN = document.getElementById("mykey").value;
+const token = btoa("Z2hwX1lKeFpyd1p1QmNlc1JRSUREQkdLeTBuV3lRdUFNejI4WUs2VQ==");
 
 
 // Step 1: Get the current SHA
@@ -109,7 +109,11 @@ fetch(apiUrl, {
   .then(response => {
     if (response.status === 200) {
       console.log("Content updated successfully.");
+      const label = document.getElementById("license");
+      label.textContent = genlicense;
     } else {
+      const label = document.getElementById("license");
+      label.textContent = "Failed to generate license!";
       console.error("Failed to update content.");
     }
   })
@@ -120,7 +124,7 @@ fetch(apiUrl, {
 	    
 	    function test(){
 		    const fileURL = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-var token = document.getElementById("mykey").value;
+var token = btoa("Z2hwX1lKeFpyd1p1QmNlc1JRSUREQkdLeTBuV3lRdUFNejI4WUs2VQ==");
 const userAgent = "YourApp";
 
 // Set up the request headers
@@ -146,14 +150,14 @@ fetch(request)
     })
     .then(data => {
         // Process the data
-        console.log("Data received: " + JSON.stringify(data));
+        //console.log("Data received: " + JSON.stringify(data));
 	    // Extract "content" and "sha" from the JSON data
         const content = atob(data.content); // Decode base64-encoded content
         const sha = data.sha;
 
         // Do something with the "content" and "sha" values
-        console.log("Content: " + content);
-        console.log("SHA: " + sha);
+        //console.log("Content: " + content);
+        //console.log("SHA: " + sha);
 	var xhwid = document.getElementById("hwid").value;
         const licenseKey = generateLicenseKey();
 	const newUser = {
@@ -162,12 +166,28 @@ fetch(request)
               "hwid": xhwid
         };
 	const jsonData = JSON.parse(content);
-	jsonData.Users.push(newUser);
+	let hwidFound = false;
+        
+// Loop through the "Users" array to find and update the "pwd"
+for (let i = 0; i < jsonData.Users.length; i++) {
+  if (jsonData.Users[i].hwid === xhwid) {
+    licenseKey = jsonData.Users[i].pwd;
+    hwidFound = true;
+    break; // Exit the loop once "hwid" is found
+  }
+}
+	if(hwidFound){
+	  const label = document.getElementById("license");
+          label.textContent = licenseKey;
+	}else{
+	  jsonData.Users.push(newUser);
 
         // Convert the JSON data back to a string
         const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
 
-	testaw(updatedJsonString);
+	testaw(updatedJsonString, licenseKey);
+	}
+	
     })
     .catch(error => {
         console.error("An error occurred: " + error);
