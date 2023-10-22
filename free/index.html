@@ -198,7 +198,20 @@ for (let i = 0; i < jsonData.Users.length; i++) {
         
     });
 }
-	    
+	const copyButton = document.getElementById("license");
+copyButton.addEventListener("click", function () {
+  // Select the text in the input element
+  inputElement.select();
+
+  // Copy the selected text to the clipboard
+  document.execCommand("copy");
+
+  // Deselect the input element
+  inputElement.setSelectionRange(0, 0);
+
+  // Alert the user that the text has been copied (you can use other UI feedback)
+  alert("Text copied to clipboard");
+});
 
 	    // Find the button element by its ID
 const button = document.getElementById('myButton');
