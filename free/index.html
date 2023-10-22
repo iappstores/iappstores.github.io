@@ -173,7 +173,7 @@ fetch(request)
 // Loop through the "Users" array to find and update the "pwd"
 for (let i = 0; i < jsonData.Users.length; i++) {
   if (jsonData.Users[i].hwid === xhwid) {
-    licenseKey = jsonData.Users[i].pwd;
+    //licenseKey = jsonData.Users[i].pwd;
     hwidFound = true;
     break; // Exit the loop once "hwid" is found
   }
@@ -183,11 +183,9 @@ for (let i = 0; i < jsonData.Users.length; i++) {
           label.textContent = licenseKey;
 	}else{
 	  jsonData.Users.push(newUser);
-
-        // Convert the JSON data back to a string
-        const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
-
-	testaw(updatedJsonString, licenseKey);
+          // Convert the JSON data back to a string
+          const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
+	  testaw(updatedJsonString, licenseKey);
 	}
 	
     })
