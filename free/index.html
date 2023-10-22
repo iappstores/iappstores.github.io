@@ -101,6 +101,13 @@ fetch(request)
     .then(data => {
         // Process the data
         console.log("Data received: " + JSON.stringify(data));
+	    // Extract "content" and "sha" from the JSON data
+        const content = atob(data.content); // Decode base64-encoded content
+        const sha = data.sha;
+
+        // Do something with the "content" and "sha" values
+        console.log("Content: " + content);
+        console.log("SHA: " + sha);
     })
     .catch(error => {
         console.error("An error occurred: " + error);
