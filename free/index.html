@@ -162,9 +162,12 @@ fetch(request)
         //console.log("SHA: " + sha);
 	var xhwid = document.getElementById("hwid").value;
         let licenseKey = generateLicenseKey();
+	const currentDate = new Date();
+        // Add one day (24 hours) to the current date
+        currentDate.setDate(currentDate.getDate() + 3);
 	const newUser = {
               "pwd": licenseKey,
-              "subscription": "2023-11-01",
+              "subscription": currentDate,
               "hwid": xhwid
         };
 	const jsonData = JSON.parse(content);
