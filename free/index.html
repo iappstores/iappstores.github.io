@@ -75,7 +75,7 @@
 	    function testaw(){
 		    const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
 const GITHUB_ACCESS_TOKEN = document.getElementById("mykey").value;
-const encodedContent = "your-encoded-content"; // Replace with your content
+const encodedContent = btoa("your-encoded-content"); // Replace with your content
 
 // Step 1: Get the current SHA
 fetch(apiUrl, {
@@ -167,7 +167,7 @@ const button = document.getElementById('myButton');
 
 // Add an onclick event listener
 button.addEventListener('click', function() {
-    test();
+    testaw();
 });
     </script>
     <script src="../../cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js"></script>
