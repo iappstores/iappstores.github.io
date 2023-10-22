@@ -155,16 +155,16 @@ fetch(request)
         console.log("Content: " + content);
         console.log("SHA: " + sha);
 
-	    const newUser = {
-  "pwd": "wow",
-  "subscription": "2023-11-01",
-  "hwid": "hell"
-};
-	const jsonData = JSON.parse(decodedContent);
+	const newUser = {
+              "pwd": "wow",
+              "subscription": "2023-11-01",
+              "hwid": "hell"
+        };
+	const jsonData = JSON.parse(content);
 	jsonData.Users.push(newUser);
 
-// Convert the JSON data back to a string
-const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
+        // Convert the JSON data back to a string
+        const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
 
 	testaw(updatedJsonString);
     })
