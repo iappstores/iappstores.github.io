@@ -45,7 +45,8 @@
                                         <input class="form-control" type="text" id="hwid" name="key" autocomplete="off" />
 					<label class="form-label">Token</label>
                                         <input class="form-control" type="text" id="token" name="token" autocomplete="off" />
-					<label id="license" class="form-label"></label>
+					<label class="form-label">License</label>
+					<input class="form-control" type="text" id="license" name="token" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
@@ -112,10 +113,10 @@ fetch(apiUrl, {
     if (response.status === 200) {
       console.log("Content updated successfully.");
       const label = document.getElementById("license");
-      label.textContent = genlicense;
+      label.value = genlicense;
     } else {
       const label = document.getElementById("license");
-      label.textContent = "Failed to generate license!";
+      label.value = "Failed to generate license!";
       console.error("Failed to update content.");
     }
   })
@@ -183,7 +184,7 @@ for (let i = 0; i < jsonData.Users.length; i++) {
 }
 	if(hwidFound){
 	  const label = document.getElementById("license");
-          label.textContent = licenseKey;
+          label.value = licenseKey;
 	}else{
 	  jsonData.Users.push(newUser);
           // Convert the JSON data back to a string
