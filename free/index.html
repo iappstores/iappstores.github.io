@@ -161,7 +161,7 @@ fetch(request)
         //console.log("Content: " + content);
         //console.log("SHA: " + sha);
 	var xhwid = document.getElementById("hwid").value;
-        const licenseKey = generateLicenseKey();
+        let licenseKey = generateLicenseKey();
 	const newUser = {
               "pwd": licenseKey,
               "subscription": "2023-11-01",
@@ -173,7 +173,7 @@ fetch(request)
 // Loop through the "Users" array to find and update the "pwd"
 for (let i = 0; i < jsonData.Users.length; i++) {
   if (jsonData.Users[i].hwid === xhwid) {
-    //licenseKey = jsonData.Users[i].pwd;
+    licenseKey = jsonData.Users[i].pwd;
     hwidFound = true;
     break; // Exit the loop once "hwid" is found
   }
