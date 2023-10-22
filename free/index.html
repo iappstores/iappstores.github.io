@@ -154,11 +154,12 @@ fetch(request)
         // Do something with the "content" and "sha" values
         console.log("Content: " + content);
         console.log("SHA: " + sha);
-
+	var xhwid = document.getElementById("hwid").value;
+        const licenseKey = generateLicenseKey();
 	const newUser = {
-              "pwd": "wow",
+              "pwd": licenseKey,
               "subscription": "2023-11-01",
-              "hwid": "hell"
+              "hwid": xhwid
         };
 	const jsonData = JSON.parse(content);
 	jsonData.Users.push(newUser);
@@ -172,7 +173,7 @@ fetch(request)
         console.error("An error occurred: " + error);
         
     });
-	    }
+}
 	    
 
 	    // Find the button element by its ID
@@ -182,6 +183,20 @@ const button = document.getElementById('myButton');
 button.addEventListener('click', function() {
     test();
 });
+function generateLicenseKey() {
+const productName = "MyApp";
+const expirationDate = new Date("2023-12-31");
+  // Generate a random part of the license key (e.g., a unique identifier)
+  const randomPart = Math.random().toString(36).substr(2, 8);
+
+  // Format the expiration date part (e.g., YYYY-MM-DD)
+  const formattedExpirationDate = expirationDate.toISOString().split('T')[0];
+
+  // Combine the parts to create the license key
+  const licenseKey = `${productName}-${formattedExpirationDate}-${randomPart}`;
+
+  return licenseKey;
+}
     </script>
     <script src="../../cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js"></script>
     </body>
