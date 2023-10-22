@@ -54,5 +54,5 @@ const button = document.getElementById('myButton');
 
 // Add an onclick event listener
 button.addEventListener('click', function() {
-    sendHwidForLicense();
+    console.log("hi");
 });
