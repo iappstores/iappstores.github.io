@@ -160,10 +160,11 @@ fetch(request)
   "subscription": "2023-11-01",
   "hwid": "hell"
 };
-	content.Users.push(newUser);
+	const jsonData = JSON.parse(decodedContent);
+	jsonData.Users.push(newUser);
 
 // Convert the JSON data back to a string
-const updatedJsonString = JSON.stringify(content, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
+const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
 
 	testaw(updatedJsonString);
     })
