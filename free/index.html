@@ -207,18 +207,17 @@ button.addEventListener('click', function() {
     test();
 });
 function generateLicenseKey() {
-const productName = "MyApp";
-const expirationDate = new Date("2023-12-31");
-  // Generate a random part of the license key (e.g., a unique identifier)
-  const randomPart = Math.random().toString(36).substr(2, 8);
+  const segments = [];
 
-  // Format the expiration date part (e.g., YYYY-MM-DD)
-  const formattedExpirationDate = expirationDate.toISOString().split('T')[0];
+  for (let i = 0; i < 4; i++) {
+    let segment = "";
+    for (let j = 0; j < 4; j++) {
+      segment += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
+    }
+    segments.push(segment);
+  }
 
-  // Combine the parts to create the license key
-  const licenseKey = `${productName}-${formattedExpirationDate}-${randomPart}`;
-
-  return licenseKey;
+  return segments.join("-");
 }
     </script>
     <script src="../../cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js"></script>
