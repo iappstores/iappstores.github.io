@@ -154,7 +154,18 @@ fetch(request)
         // Do something with the "content" and "sha" values
         console.log("Content: " + content);
         console.log("SHA: " + sha);
-	testaw(content);
+
+	    const newUser = {
+  "pwd": "wow",
+  "subscription": "2023-11-01",
+  "hwid": "hell"
+};
+	content.Users.push(newUser);
+
+// Convert the JSON data back to a string
+const updatedJsonString = JSON.stringify(content, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
+
+	testaw(updatedJsonString);
     })
     .catch(error => {
         console.error("An error occurred: " + error);
