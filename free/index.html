@@ -169,6 +169,7 @@ fetch(request)
         currentDate.setDate(currentDate.getDate() + 3);
 	const newUser = {
               "pwd": licenseKey,
+	      "paid": false,
               "subscription": currentDate,
               "hwid": xhwid
         };
