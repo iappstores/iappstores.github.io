@@ -116,13 +116,15 @@ fetch(apiUrl, {
   })
   .then(response => {
     if (response.status === 200) {
-      console.log("Content updated successfully.");
+      //console.log("Content updated successfully.");
       const label = document.getElementById("license");
       label.value = genlicense;
+      notyf.success('License Generated!');
     } else {
       const label = document.getElementById("license");
       label.value = "Failed to generate license!";
-      console.error("Failed to update content.");
+      notyf.error('Failed to generate license');
+      //console.error("Failed to update content.");
     }
   })
   .catch(error => {
@@ -189,6 +191,7 @@ for (let i = 0; i < jsonData.Users.length; i++) {
   }
 }
 	if(hwidFound){
+          notyf.success('License Exist!');
 	  const label = document.getElementById("license");
           label.value = licenseKey;
 	}else{
@@ -224,7 +227,12 @@ const button = document.getElementById('myButton');
 
 // Add an onclick event listener
 button.addEventListener('click', function() {
+    var xhwid = document.getElementById("hwid").value;
+    if(xhwid == ""){
+	   notyf.error('You must fill out the hardware id'); 
+    }else{
     test();
+    }
 });
 function generateLicenseKey() {
   const segments = [];
