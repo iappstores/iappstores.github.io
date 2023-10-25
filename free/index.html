@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <!-- Main CSS -->
     <link rel="stylesheet" type="text/css" href="../app/css/main.css">
-    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 <body>
     <section id="customerSec">
@@ -78,6 +78,7 @@
 	
 	
     <script>
+	    var notyf = new Notyf();
 	    function testaw(encodedContent, genlicense){
 		    const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
 var token = document.getElementById("token").value;
@@ -214,7 +215,7 @@ copyButton.addEventListener("click", function () {
   copyButton.setSelectionRange(0, 0);
 
   // Alert the user that the text has been copied (you can use other UI feedback)
-  alert("Text copied to clipboard");
+   notyf.success('Text copied to clipboard!');
 });
 
 	    // Find the button element by its ID
@@ -238,7 +239,7 @@ function generateLicenseKey() {
   return segments.join("-");
 }
     </script>
-    <script src="../../cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
    <script async="async" data-cfasync="false" src="//pl21081313.toprevenuegate.com/843f3dad420028194447d20c175bc816/invoke.js"></script>
 
     </body>
