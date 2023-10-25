@@ -49,10 +49,4 @@ function sendHwidForLicense(){
   });
 }
 
-// Find the button element by its ID
-const button = document.getElementById('myButton');
 
-// Add an onclick event listener
-button.addEventListener('click', function() {
-    console.log("hi");
-});
