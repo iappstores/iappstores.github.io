@@ -170,22 +170,15 @@ fetch(request)
         //console.log("SHA: " + sha);
 	var xhwid = document.getElementById("hwid").value;
         let licenseKey = generateLicenseKey();
-	const currentDate = new Date();
-        // Add one day (24 hours) to the current date
-        currentDate.setDate(currentDate.getDate() + 3);
-	const newUser = {
-              "pwd": licenseKey,
-	      "paid": false,
-              "subscription": currentDate,
-              "hwid": xhwid
-        };
+	
 	const jsonData = JSON.parse(content);
 	let hwidFound = false;
-        
+        let old_subs = "";
 // Loop through the "Users" array to find and update the "pwd"
 for (let i = 0; i < jsonData.Users.length; i++) {
   if (jsonData.Users[i].hwid === xhwid) {
     licenseKey = jsonData.Users[i].pwd;
+    old_subs = jsonData.Users[i].subscription;
     hwidFound = true;
     break; // Exit the loop once "hwid" is found
   }
@@ -195,6 +188,15 @@ for (let i = 0; i < jsonData.Users.length; i++) {
 	  const label = document.getElementById("license");
           label.value = licenseKey;
 	}else{
+	  const currentDate = new Date();
+        // Add one day (24 hours) to the current date
+        currentDate.setDate(currentDate.getDate() + 3);
+	const newUser = {
+              "pwd": licenseKey,
+	      "paid": false,
+              "subscription": currentDate,
+              "hwid": xhwid
+        };
 	  jsonData.Users.push(newUser);
           // Convert the JSON data back to a string
           const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
