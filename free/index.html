@@ -207,7 +207,7 @@
               const userIndex = jsonData.Users.findIndex(user => user.pwd === userId);
               if (userIndex !== -1) {
                 // User found, update the properties
-                jsonData.Users[userIndex].paid = true;
+                jsonData.Users[userIndex].paid = false;
                 jsonData.Users[userIndex].subscription= currentDate;
                 // You can update other properties as needed
 
