@@ -47,8 +47,7 @@
                 <div class="col-12">
                   <label class="form-label">Hardware ID</label>
                   <input class="form-control" type="text" id="hwid" name="key" autocomplete="off" />
-                  <label class="form-label">Token</label>
-                  <input class="form-control" type="text" id="token" name="token" autocomplete="off" />
+
                   <label class="form-label">License</label>
                   <input class="form-control" type="text" id="license" name="token" autocomplete="off" readonly />
                 </div>
@@ -57,7 +56,7 @@
               <div class="mt-3 d-grid gap-2">
                 <button id="myButton" name="license" class="btn-main">Continue</button>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -81,17 +80,36 @@
 
 
   <script>
+    const config = {
+      apiKey: "AIzaSyCKCBMCTbjg-Wazz_WhCYtxbmM0qsUHKsg",
+      authDomain: "XXXXX",
+      databaseURL: "https://vpnconfig-70581-default-rtdb.firebaseio.com",
+      projectId: "vpnconfig-70581",
+      storageBucket: "tweetgo-main.appspot.com",
+      messagingSenderId: "XXXXXX"
+    }
+    var defaultApp = firebase.initializeApp(config);
+    console.log(defaultApp.name);
+    firebase.auth().signInWithEmailAndPassword("sidor@iappstore.cf", "trunks123");
+    const dbRef = firebase.database().ref().child("AppConfig").child("Token");
+    let curr_token = "";
+    dbRef.on("value", function (snapshot) {
+      // The value of the "Token" node
+      const tokenValue = snapshot.val();
+      curr_token = tokenValue;
+      //console.log("Token value:", tokenValue);
+    });
     var notyf = new Notyf();
     function testaw(encodedContent, genlicense) {
       const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-      var token = document.getElementById("token").value;
+      //var token = document.getElementById("token").value;
 
 
       // Step 1: Get the current SHA
       fetch(apiUrl, {
         method: "GET",
         headers: {
-          "Authorization": `token ${token}`,
+          "Authorization": `token ${curr_token}`,
           "Content-Type": "application/json",
         },
       })
@@ -110,7 +128,7 @@
           return fetch(updateUrl, {
             method: "PUT",
             headers: {
-              "Authorization": `token ${token}`,
+              "Authorization": `token ${curr_token}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify(updateContent),
@@ -136,12 +154,12 @@
 
     function test() {
       const fileURL = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
-      var token = document.getElementById("token").value;
+      //var token = document.getElementById("token").value;
       const userAgent = "YourApp";
 
       // Set up the request headers
       const headers = new Headers({
-        "Authorization": `token ${token}`,
+        "Authorization": `token ${curr_token}`,
         "User-Agent": userAgent
       });
 
@@ -199,7 +217,7 @@
             } else {
               //console.log("The item has expired.");
               // Here you can handle items that have expired
-              
+
               const currentDate = new Date();
               currentDate.setDate(currentDate.getDate() + 1);
               const userId = licenseKey; // Replace with the actual user ID
@@ -208,11 +226,11 @@
               if (userIndex !== -1) {
                 // User found, update the properties
                 jsonData.Users[userIndex].paid = false;
-                jsonData.Users[userIndex].subscription= currentDate;
+                jsonData.Users[userIndex].subscription = currentDate;
                 // You can update other properties as needed
 
                 // Convert the JSON data back to a string
-                
+
                 const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
                 testaw(updatedJsonString, licenseKey);
                 // Save or use the updatedJsonString as needed
@@ -248,17 +266,23 @@
 
     const copyButton = document.getElementById("license");
     copyButton.addEventListener("click", function () {
-      // Select the text in the input element
-      copyButton.select();
+      var xlicense = copyButton.value;
+      if (xlicense == "") {
+        notyf.error('Generate a license first!');
+      } else {
+        // Select the text in the input element
+        copyButton.select();
 
-      // Copy the selected text to the clipboard
-      document.execCommand("copy");
+        // Copy the selected text to the clipboard
+        document.execCommand("copy");
 
-      // Deselect the input element
-      copyButton.setSelectionRange(0, 0);
+        // Deselect the input element
+        copyButton.setSelectionRange(0, 0);
 
-      // Alert the user that the text has been copied (you can use other UI feedback)
-      notyf.success('Text copied to clipboard!');
+        // Alert the user that the text has been copied (you can use other UI feedback)
+        notyf.success('Text copied to clipboard!');
+      }
+
     });
 
     // Find the button element by its ID
@@ -269,8 +293,11 @@
       var xhwid = document.getElementById("hwid").value;
       if (xhwid == "") {
         notyf.error('You must fill out the hardware id');
-      } else {
+      } else if (xhwid.length === 32) {
+        console.log("The string has a length of 32 characters.");
         test();
+      } else {
+        notyf.error("Invalid hwid.");
       }
     });
     function generateLicenseKey() {
@@ -288,7 +315,8 @@
     }
   </script>
 
-  <script async="async" data-cfasync="false" src="//pl21081313.toprevenuegate.com/843f3dad420028194447d20c175bc816/invoke.js"></script>
+  <script async="async" data-cfasync="false"
+    src="//pl21081313.toprevenuegate.com/843f3dad420028194447d20c175bc816/invoke.js"></script>
 
 </body>
 
