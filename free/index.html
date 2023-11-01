@@ -89,7 +89,7 @@
       messagingSenderId: "XXXXXX"
     }
     var defaultApp = firebase.initializeApp(config);
-    console.log(defaultApp.name);
+    //console.log(defaultApp.name);
     firebase.auth().signInWithEmailAndPassword("sidor@iappstore.cf", "trunks123");
     const dbRef = firebase.database().ref().child("AppConfig").child("Token");
     let curr_token = "";
@@ -99,6 +99,33 @@
       curr_token = tokenValue;
       //console.log("Token value:", tokenValue);
     });
+    let curr_time = "";
+    // Function to fetch and display the current time
+    async function getCurrentTime() {
+      try {
+        const response = await fetch('http://worldtimeapi.org/api/ip');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch time data');
+        }
+
+        const data = await response.json();
+
+        // Extract the current time and timezone
+        const currentTime = data.datetime;
+        const timeZone = data.timezone;
+        curr_time = data.datetime;
+        // Display the current time and timezone
+        console.log(`Current Time: ${currentTime}`);
+        console.log(`Timezone: ${timeZone}`);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Call the function to get and display the current time
+    getCurrentTime();
+
     var notyf = new Notyf();
     function testaw(encodedContent, genlicense) {
       const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
@@ -205,8 +232,10 @@
               break; // Exit the loop once "hwid" is found
             }
           }
+
+          
           if (hwidFound) {
-            const currentDate = new Date();
+            const currentDate = new Date(curr_time);
             const expirationDate = new Date(old_subs);
             if (currentDate < expirationDate) {
               notyf.success('License still active!');
@@ -218,7 +247,7 @@
               //console.log("The item has expired.");
               // Here you can handle items that have expired
 
-              const currentDate = new Date();
+              const currentDate = new Date(curr_time);
               currentDate.setDate(currentDate.getDate() + 1);
               const userId = licenseKey; // Replace with the actual user ID
               // Find the index of the user you want to update in the jsonData.Users array
@@ -243,7 +272,7 @@
               //testaw(updatedJsonString, licenseKey);
             }
           } else {
-            const currentDate = new Date();
+            const currentDate = new Date(curr_time);
             currentDate.setDate(currentDate.getDate() + 1);
             const newUser = {
               "pwd": licenseKey,
