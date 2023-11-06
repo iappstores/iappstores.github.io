@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0">
+	<title>Admin Panel</title>
+	<link rel="stylesheet" href="../app/css/bootstrap.min.css">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet"> -->
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+	<!-- Material Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+	<!-- Add additional services that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+</head>
+
+<body class="bgform" style="padding: 9%">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-5 m-auto rounded">
+				<form id="formAuthentication" class="border form-vertical" enctype="multipart/form-data">
+					<div class="text-left p-3 bgcolor">
+						<h4 class="mb-2">Welcome! 👋</h4>
+						<p class="mb-4">Please sign-in to your account and start the adventure</p>
+					</div>
+
+					<div class="panel-body p-4 ">
+						<div class="form-group ">
+							<input id="email" type="text" name="email" class="form-control" placeholder="Enter your email"
+							autofocus>
+						</div>
+						<div class="form-group  ">
+							<input id="password" type="password" name="password" class="form-control" placeholder="Password">
+						</div>
+						<div class="form-group ">
+							
+							<div class="mb-3">
+								<button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+							  </div>
+						</div>
+					</div>
+					
+					<p class="text-center">
+						<span>New on our platform?</span>
+						<a href="#">
+						  <span>Create an account</span>
+						</a>
+					  </p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/loginpage.js"></script>
+
+</html>
