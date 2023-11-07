@@ -5,25 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap 5 Simple Admin Dashboard</title>
-    <link rel="stylesheet" href="../app/css/bootstrap.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet">
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-  <!-- Add additional services that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
 
     <style>
         .sidebar {
@@ -63,6 +56,21 @@
         .sidebar .nav-link.active {
             color: #0d6efd;
         }
+
+        .secret {
+            transition: filter 0.3s;
+            /* Add a transition for a smooth effect */
+        }
+
+        .secret:hover {
+            filter: none;
+            /* Remove the filter effect on hover */
+        }
+
+        .secret:not(:hover) {
+            filter: blur(0px);
+            /* Apply a blur filter when not hovering */
+        }
     </style>
 </head>
 
@@ -80,14 +88,14 @@
 
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
-               <!-- <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard"
+                <!-- <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard"
                     data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star"
                     data-size="large" data-show-count="true"
                     aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a> -->
             </div>
             <div class="dropdown">
-                <button id="xUsers" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-expanded="false">
+                <button id="xUsers" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Hello, John Doe
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -98,6 +106,155 @@
             </div>
         </div>
     </nav>
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Users</h5>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                    transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                    fill="black" />
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+                <form id="editForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <label for="recipient-name" class="control-label">License:</label>
+
+                            <input type="text" id="licenseid" class="form-control" placeholder="HWID">
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="recipient-name" class="control-label">HWID:</label>
+
+                            <input type="text" id="hwid" class="form-control" placeholder="HWID">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Users</h5>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                    transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                    fill="black" />
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+                <form id="createForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">HWID:</label>
+                            <input type="text" class="form-control" placeholder="HWID">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Subscription:
+                            </label>
+                            <select name="sub" class="form-control" id="subscriptionSelect">
+                                <option value="value1">Free</option>
+                                <option value="value2">VIP</option>
+                                <option value="value2">SVIP</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">License Duration
+                                Unit:</label>
+                            <select name="expiry" class="form-control" id="durationUnitSelect">
+                                <option value="86400">Days</option>
+                                <option value="60">Minutes</option>
+                                <option value="3600">Hours</option>
+                                <option value="604800">Weeks</option>
+                                <option value="2629743">Months</option>
+                                <option value="31556926">Years</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">License Duration:</label>
+                            <input type="number" class="form-control" placeholder="Days" id="subsDate" value="1">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--begin::Modal - Delete all users-->
+    <div class="modal fade" tabindex="-1" id="delete-allusers" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-900px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header">
+                    <h2 class="modal-title">Delete All Users</h2>
+
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                    transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                    fill="black" />
+                            </svg>
+                        </span>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <div class="modal-body">
+                    <label class="fs-5 fw-bold mb-2">
+                        <p> Are you sure you want to delete all users? This can not be undone.
+                        </p>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" data-bs-dismiss="modal">No</button>
+                    <button id="deleteAll" data-bs-dismiss="modal" name="delusers" class="btn btn-danger">Yes</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal - Delete all users-->
+
+
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -174,7 +331,7 @@
                                 <span class="ml-2">Integrations</span>
                             </a>
                         </li>
-                       
+
                     </ul>
                 </div>
             </nav>
@@ -186,7 +343,7 @@
                     </ol>
                 </nav>
                 <h1 class="h2">Dashboard</h1>
-                
+
                 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <div class="card text-white bg-primary">
@@ -215,7 +372,7 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <div class="card text-white bg-danger">
                             <div class="card-header"><i class="fa fa-pie-chart"></i> Free</div>
@@ -226,65 +383,108 @@
                         </div>
                     </div>
                 </div>
+                <div class="alert alert-primary" role="alert">
+                    Please join Discord <a href="https://t.me/keyauth" target="_blank">https://discord.gg</a>
+                </div>
 
                 <div class="row">
-                    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                    <div class="col-12">
                         <div class="card">
                             <h5 class="card-header">Latest transactions</h5>
                             <div class="card-body">
+
+
+                                <form>
+
+                                    <button data-bs-toggle="modal" type="button" id="modal" onclick="openCreateModal()"
+                                        class="dt-button buttons-print btn btn-primary mr-1"><i
+                                            class="fas fa-plus-circle fa-sm text-white-50"></i>
+                                        Create User</button>
+
+                                    <button data-bs-toggle="modal" type="button" data-bs-target="#extend-user"
+                                        class="dt-button buttons-print btn btn-primary mr-1"><i
+                                            class="fas fa-clock fa-sm text-white-50"></i> Extend
+                                        User(s)</button>
+                                    <button data-bs-toggle="modal" type="button" data-bs-target="#subtract-user"
+                                        class="dt-button buttons-print btn btn-primary mr-1"><i
+                                            class="fas fa-clock fa-sm text-white-50"></i> Subtract
+                                        User(s)</button><br><br>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#delete-allusers"
+                                        class="dt-button buttons-print btn btn-danger mr-1"><i
+                                            class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        Delete All Users</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#delete-allexpired"
+                                        class="dt-button buttons-print btn btn-danger mr-1"><i
+                                            class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        Delete Expired Users</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#reset-allusers"
+                                        class="dt-button buttons-print btn btn-danger mr-1"><i
+                                            class="fas fa-redo-alt fa-sm text-white-50"></i>
+                                        HWID Reset All Users</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#unban-allusers"
+                                        class="dt-button buttons-print btn btn-danger mr-1"><i
+                                            class="fas fa-users fa-sm text-white-50"></i>
+                                        Unban All Users</button>
+                                </form>
+                                </br>
+
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">License</th>
                                                 <th scope="col">HWID</th>
+                                                <th scope="col">IP</th>
                                                 <th scope="col">SUBS</th>
                                                 <th scope="col">Date</th>
+                                                <th scope="col">Banned</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="myUserTable">
-                                            
-                                            
+                                            <!-- Your table content goes here -->
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="#" class="btn btn-block btn-light">View all</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-4">
-                        <div class="card">
-                            <h5 class="card-header">Traffic last 6 months</h5>
-                            <div class="card-body">
-                                <div id="traffic-chart"></div>
+                                <nav aria-label="...">
+                                    <ul class="pagination" id="pagination">
+                                      <li class="page-item" id="prevPage">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                      </li>
+                                    </ul>
+                                  </nav>
+                                  <div id="pageButtons">
+                                    <!-- Page number buttons will be dynamically added here -->
+                                  </div>
+                                <a class="btn btn-block btn-light">View all</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <div class="row my-4">
                     <div class="col-lg-6 col-md-6 col-sm-12 pr-0 mb-3">
-                      <div class="card-collapsible card">
-                        <div class="card-header">
-                          Subscription Chart <i class="fa fa-caret-down caret"></i>
+                        <div class="card-collapsible card">
+                            <div class="card-header">
+                                Subscription Chart <i class="fa fa-caret-down caret"></i>
+                            </div>
+                            <div class="card-body d-flex justify-content-around">
+                                <canvas class="chart w-100" id="pieChart"></canvas>
+                            </div>
                         </div>
-                        <div class="card-body d-flex justify-content-around">
-                            <canvas class="chart w-100" id="pieChart"></canvas>
-                        </div>
-                      </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 pr-0 mb-3">
-                      <div class="card-collapsible card">
-                        <div class="card-header">
-                          Bar Chart <i class="fa fa-caret-down caret"></i>
+                        <div class="card-collapsible card">
+                            <div class="card-header">
+                                Bar Chart <i class="fa fa-caret-down caret"></i>
+                            </div>
+                            <div class="card-body d-flex justify-content-around">
+                                <canvas class="chart w-100" id="barChart"></canvas>
+                            </div>
                         </div>
-                        <div class="card-body d-flex justify-content-around">
-                            <canvas class="chart w-100" id="barChart"></canvas>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
 
                 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -328,9 +528,9 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
+
+
+
                 <footer class="pt-5 d-flex justify-content-between">
                     <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
                     <ul class="nav m-0">
@@ -347,28 +547,21 @@
                 </footer>
             </main>
         </div>
+
+
+
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+
     <script src="js/dashboard.js"></script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script>
-        new Chartist.Line('#traffic-chart', {
-            labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-            series: [
-                [23000, 25000, 19000, 34000, 56000, 64000]
-            ]
-        }, {
-            low: 0,
-            showArea: true
-        });
-    </script>
+
 </body>
 
 </html>
