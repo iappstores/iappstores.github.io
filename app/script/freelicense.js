@@ -1,4 +1,4 @@
-const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db";
+const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/thx";
 const config = {
     apiKey: "AIzaSyCKCBMCTbjg-Wazz_WhCYtxbmM0qsUHKsg",
     authDomain: "XXXXX",
