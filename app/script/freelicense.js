@@ -1,3 +1,4 @@
+const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db";
 const config = {
     apiKey: "AIzaSyCKCBMCTbjg-Wazz_WhCYtxbmM0qsUHKsg",
     authDomain: "XXXXX",
@@ -64,7 +65,7 @@ const config = {
 
   var notyf = new Notyf();
   function testaw(encodedContent, genlicense) {
-    const apiUrl = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
+    
     //var token = document.getElementById("token").value;
 
 
@@ -116,7 +117,6 @@ const config = {
   }
 
   function test() {
-    const fileURL = "https://api.github.com/repos/denverku/sfhacks/contents/db2";
     //var token = document.getElementById("token").value;
     const userAgent = "YourApp";
 
@@ -127,7 +127,7 @@ const config = {
     });
 
     // Create a request object
-    const request = new Request(fileURL, {
+    const request = new Request(apiUrl, {
       method: "GET",
       headers: headers
     });
@@ -180,17 +180,16 @@ const config = {
           } else {
             //console.log("The item has expired.");
             // Here you can handle items that have expired
-
             const userId = licenseKey; // Replace with the actual user ID
             // Find the index of the user you want to update in the jsonData.Users array
             const userIndex = jsonData.Users.findIndex(user => user.pwd === userId);
             if (userIndex !== -1) {
               const currentDate = new Date(curr_time);
-              const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+              const oneDayInMilliseconds =  5 * 60 * 1000;
               currentDate.setTime(currentDate.getTime() + oneDayInMilliseconds);
               console.log(currentDate);
               // User found, update the properties
-              jsonData.Users[userIndex].paid = false;
+              jsonData.Users[userIndex].paid = 0;
               jsonData.Users[userIndex].subscription = currentDate;
               // Convert the JSON data back to a string
               const updatedJsonString = JSON.stringify(jsonData, null, 2); // The second argument (null) is for replacer function, and the third argument (2) is for pretty printing.
@@ -203,11 +202,11 @@ const config = {
           }
         } else {
           const currentDate = new Date(curr_time);
-          const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+          const oneDayInMilliseconds = 5 * 60 * 1000;
           currentDate.setTime(currentDate.getTime() + oneDayInMilliseconds);
           const newUser = {
             "pwd": licenseKey,
-            "paid": false,
+            "paid": 0,
             "subscription": currentDate,
             "hwid": xhwid
           };
@@ -220,7 +219,6 @@ const config = {
       })
       .catch(error => {
         console.error("An error occurred: " + error);
-
       });
   }
 
@@ -253,11 +251,8 @@ const config = {
     var xhwid = document.getElementById("hwid").value;
     if (xhwid == "") {
       notyf.error('You must fill out the hardware id');
-    } else if (xhwid.length === 32) {
-      console.log("The string has a length of 32 characters.");
+    }  else {
       test();
-    } else {
-      notyf.error("Invalid hwid.");
     }
   });
   function generateLicenseKey() {
