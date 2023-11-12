@@ -21,6 +21,7 @@ document.getElementById("logout").addEventListener("click", function () {
     });
 });
 const dbRef = firebase.database().ref().child("AppConfig").child("Token");
+
 let curr_token = "";
 dbRef.once("value", function (snapshot) {
     // The value of the "Token" node
@@ -59,11 +60,11 @@ function openEditModal(user, hwid) {
     myModal.show();
 
     const editForm = document.getElementById('editUserModal');
-    
+
     editForm.querySelector('#licenseid').value = user;
     editForm.querySelector('#hwid').value = hwid;
 
-    
+
     editForm.addEventListener('submit', function (event) {
         event.preventDefault();
         const hwidEdit = editForm.querySelector('#hwid').value;
@@ -76,20 +77,20 @@ function openCreateModal() {
     var myModal = new bootstrap.Modal(document.getElementById("createUserModal"), {});
     myModal.show();
     const Form = document.getElementById('createForm');
-    
+
     Form.addEventListener('submit', function (event) {
         event.preventDefault();
+        const hwid = Form.querySelector('#hwid').value
         const subs = Form.querySelector('#subsDate').value;
         const selectElement = Form.querySelector('#subscriptionSelect');
         const durationUnitEl = Form.querySelector('#durationUnitSelect');
         const timeUnit = durationUnitEl.value;
         const subtype = selectElement.selectedIndex;
         if (/^\d+$/.test(subs)) {
-            generateUser(subtype, subs, timeUnit);
+            generateUser(subtype, subs, timeUnit, hwid);
         } else {
             notyf.error('Subscription Expiry must be a numeric value.');
         }
-
     });
 }
 
@@ -292,7 +293,7 @@ function renderPage(page, jsonData) {
     }
 }
 
-function generateUser(substype, subsdate, timeUnit) {
+/*function generateUser(substype, subsdate, timeUnit) {
     // Step 1: Get the current SHA
     fetch(apiUrl, {
         method: "GET",
@@ -354,20 +355,12 @@ function generateUser(substype, subsdate, timeUnit) {
         })
         .then(response => {
             if (response.status === 200) {
-                //console.log("Content updated successfully.");
-                //const label = document.getElementById("license");
-                //label.value = genlicense;
                 notyf.success('License Generated!');
             } else if (response.status === 201) {
-                //console.log("Content updated successfully.");
-                //const label = document.getElementById("license");
-                //label.value = genlicense;
                 notyf.success('License Generated!');
             } else {
-                //const label = document.getElementById("license");
-                //label.value = "Failed to generate license!";
                 notyf.error('Failed to generate license');
-                //console.error("Failed to update content.");
+                
             }
             //getUsers();
             // Reload the current page
@@ -378,7 +371,169 @@ function generateUser(substype, subsdate, timeUnit) {
         .catch(error => {
             console.error("An error occurred: " + error);
         });
+}*/
+
+/*async function generateUser(substype, subsdate, timeUnit) {
+    // Step 1: Get the current SHA
+    $.ajax({
+        url: apiUrl,
+        method: "GET",
+        headers: {
+            "Authorization": `token ${curr_token}`,
+            "Content-Type": "application/json",
+        },
+        success: function(data) {
+            const sha = data.sha;
+            const content = atob(data.content);
+            const jsonData = JSON.parse(content);
+
+            let licenseKey = generateLicenseKey(); // generate license
+
+            let licenseFound = false;
+
+            // Loop through the "Users" array to find and update the "pwd"
+            for (let i = 0; i < jsonData.Users.length; i++) {
+                if (jsonData.Users[i].pwd === licenseKey) {
+                    licenseFound = true;
+                    break; // Exit the loop once "hwid" is found
+                }
+            }
+
+            if (licenseFound) {
+
+            } else {
+                const currentDate = new Date(curr_time);
+                const daysInMilliseconds = subsdate * timeUnit * 1000;
+                currentDate.setTime(currentDate.getTime() + daysInMilliseconds);
+                const newUser = {
+                    "pwd": licenseKey,
+                    "paid": substype,
+                    "ban": false,
+                    "subscription": currentDate,
+                    "hwid": ""
+                };
+                jsonData.Users.push(newUser);
+            }
+
+            const updatedJsonString = JSON.stringify(jsonData, null, 2);
+            // Step 2: Update the content
+            const updateContent = {
+                message: `Update ${licenseKey}`,
+                content: btoa(updatedJsonString),
+                sha: sha,
+            };
+
+            $.ajax({
+                url: apiUrl,
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${curr_token}`,
+                    "Content-Type": "application/json",
+                },
+                data: JSON.stringify(updateContent),
+                success: function(response) {
+                    if (response.status === 200) {
+                        notyf.success('License Generated!');
+                    } else if (response.status === 201) {
+                        notyf.success('License Generated!');
+                    } else {
+                        notyf.error('Failed to generate license');
+                    }
+                    getUsers();
+                    // Reload the current page
+                    
+                },
+                error: function(error) {
+                    console.error("An error occurred: " + error);
+                }
+            });
+        },
+        error: function(error) {
+            console.error("An error occurred: " + error);
+        }
+    });
+}*/
+
+async function generateUser(substype, subsdate, timeUnit, hwid) {
+    // Step 1: Get the current SHA
+    await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+            "Authorization": `token ${curr_token}`,
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            const sha = data.sha;
+            const content = atob(data.content);
+            const jsonData = JSON.parse(content);
+
+            let licenseKey = generateLicenseKey(); // generate license
+
+            let licenseFound = false;
+
+            // Loop through the "Users" array to find and update the "pwd"
+            for (let i = 0; i < jsonData.Users.length; i++) {
+                if (jsonData.Users[i].pwd === licenseKey) {
+                    licenseFound = true;
+                    break; // Exit the loop once "hwid" is found
+                }
+            }
+
+            if (licenseFound) {
+
+            } else {
+                const currentDate = new Date(curr_time);
+                const daysInMilliseconds = subsdate * timeUnit * 1000;
+                currentDate.setTime(currentDate.getTime() + daysInMilliseconds);
+                const newUser = {
+                    "pwd": licenseKey,
+                    "paid": substype,
+                    "ban": false,
+                    "subscription": currentDate,
+                    "hwid": hwid
+                };
+                jsonData.Users.push(newUser);
+            }
+
+            const updatedJsonString = JSON.stringify(jsonData, null, 2);
+            // Step 2: Update the content
+            const updateContent = {
+                message: `Update ${new Date()}`,
+                content: btoa(updatedJsonString),
+                sha: sha,
+            };
+
+            return fetch(apiUrl, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${curr_token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updateContent),
+            });
+        })
+        .then(response => {
+            if (response.status === 200) {
+                notyf.success('License Generated!');
+                
+            } else if (response.status === 201) {
+                notyf.success('License Generated!');
+            } else {
+                notyf.error('Failed to generate license');
+            }
+            getUsers();
+            // Reload the current page
+            /*setTimeout(function () {
+                location.reload();
+              }, 2000);*/
+        })
+        .catch(error => {
+            console.error("An error occurred: " + error);
+        });
 }
+
 
 function editUser(license, hwid) {
     // Step 1: Get the current SHA
@@ -394,8 +549,6 @@ function editUser(license, hwid) {
             const sha = data.sha;
             const content = atob(data.content);
             const jsonData = JSON.parse(content);
-
-
             const userIndex = jsonData.Users.findIndex(user => user.pwd == license);
             if (userIndex != -1) {
                 // User found, update the properties
@@ -409,7 +562,7 @@ function editUser(license, hwid) {
             const updatedJsonString = JSON.stringify(jsonData, null, 2);
             // Step 2: Update the content
             const updateContent = {
-                message: `Update ${license}`,
+                message: `Update ${new Date()}`,
                 content: btoa(updatedJsonString),
                 sha: sha,
             };
@@ -440,7 +593,7 @@ function editUser(license, hwid) {
                 //console.error("Failed to update content.");
             }
             getUsers();
-            
+
         })
         .catch(error => {
             console.error("An error occurred: " + error);
@@ -474,9 +627,9 @@ function deleteUser(license) {
 
             const updatedJsonString = JSON.stringify(jsonData, null, 2);
             // Step 2: Update the content
-           
+
             const updateContent = {
-                message: `Update ${license}`,
+                message: `Update ${new Date()}`,
                 content: btoa(updatedJsonString),
                 sha: sha,
             };
@@ -491,25 +644,20 @@ function deleteUser(license) {
         })
         .then(response => {
             if (response.status === 200) {
-                //console.log("Content updated successfully.");
-                //const label = document.getElementById("license");
-                //label.value = genlicense;
+                
                 notyf.success('License Deleted!');
             } else if (response.status === 201) {
-                //console.log("Content updated successfully.");
-                //const label = document.getElementById("license");
-                //label.value = genlicense;
+                
                 notyf.success('License Deleted!');
             } else {
-                //const label = document.getElementById("license");
-                //label.value = "Failed to generate license!";
+                
                 notyf.error('Failed to delete license');
                 //console.error("Failed to update content.");
             }
             //getUsers();
             setTimeout(function () {
                 location.reload();
-              }, 2000);
+            }, 2000);
         })
         .catch(error => {
             console.error("An error occurred: " + error);
@@ -536,7 +684,7 @@ function clearAllUser() {
             const updatedJsonString = JSON.stringify(jsonData, null, 2);
             // Step 2: Update the content
             const updateContent = {
-                message: `Clear all`,
+                message: `Clear all ${new Date()}`,
                 content: btoa(updatedJsonString),
                 sha: sha,
             };
@@ -556,7 +704,7 @@ function clearAllUser() {
                 //const label = document.getElementById("license");
                 //label.value = genlicense;
                 notyf.success('All License Deleted!');
-            } else if (response.status === 200) {
+            } else if (response.status === 201) {
                 //console.log("Content updated successfully.");
                 //const label = document.getElementById("license");
                 //label.value = genlicense;
@@ -570,7 +718,67 @@ function clearAllUser() {
             //getUsers();
             setTimeout(function () {
                 location.reload();
-              }, 2000);
+            }, 2000);
+        })
+        .catch(error => {
+            console.error("An error occurred: " + error);
+        });
+}
+
+function clearAllExpiredUser() {
+    // Step 1: Get the current SHA
+    fetch(apiUrl, {
+        method: "GET",
+        headers: {
+            "Authorization": `token ${curr_token}`,
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            const sha = data.sha;
+            const content = atob(data.content);
+            const jsonData = JSON.parse(content);
+
+            for (let i = 0; i < jsonData.Users.length; i++) {
+                const currentDate = new Date(curr_time);
+                const expirationDate = new Date(jsonData.Users[i].subscription);
+                if (currentDate < expirationDate) {
+                   // jsonData.Users.splice(i, 1);
+                }else{
+                    console.log(jsonData.Users[i].pwd + " expired")
+                }
+            }
+
+            const updatedJsonString = JSON.stringify(jsonData, null, 2);
+            // Step 2: Update the content
+            const updateContent = {
+                message: `Clear all ${new Date()}`,
+                content: btoa(updatedJsonString),
+                sha: sha,
+            };
+
+            return fetch(apiUrl, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${curr_token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updateContent),
+            });
+        })
+        .then(response => {
+            if (response.status === 200) {
+                notyf.success('All License Deleted!');
+            } else if (response.status === 201) {
+                notyf.success('All License Deleted!');
+            } else {
+                notyf.error('Failed to delete license');
+            }
+            //getUsers();
+            setTimeout(function () {
+                location.reload();
+            }, 2000);
         })
         .catch(error => {
             console.error("An error occurred: " + error);
@@ -591,6 +799,41 @@ function generateLicenseKey() {
     return segments.join("-");
 }
 
+ // Get the input field and table
+ var input = document.getElementById("filterInput");
+ var table = document.getElementById("myUserTable");
+
+ // Add an event listener to the input field
+ input.addEventListener("input", function() {
+     // Get the filter value from the input
+     var filter = input.value.toUpperCase();
+
+     // Get all rows of the table
+     var rows = table.getElementsByTagName("tr");
+
+     // Loop through all table rows and hide those that don't match the filter
+     for (var i = 1; i < rows.length; i++) {
+         var row = rows[i];
+         var cells = row.getElementsByTagName("td");
+         var shouldHide = true;
+
+         // Loop through all cells in the current row
+         for (var j = 0; j < cells.length; j++) {
+             var cell = cells[j];
+             if (cell) {
+                 var cellText = cell.textContent || cell.innerText;
+                 if (cellText.toUpperCase().indexOf(filter) > -1) {
+                     shouldHide = false;
+                     break;
+                 }
+             }
+         }
+
+         // Toggle the display property based on whether the row should be hidden
+         row.style.display = shouldHide ? "none" : "";
+     }
+ });
+
 var curr_time = "";
 // Function to fetch and display the current time
 async function getCurrentTime() {
@@ -602,7 +845,6 @@ async function getCurrentTime() {
         }
 
         const data = await response.json();
-
         // Extract the current time and timezone
         const currentTime = data.datetime;
         const timeZone = data.timezone;
