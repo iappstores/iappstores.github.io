@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 5 Simple Admin Dashboard</title>
+    <title>TKStudio Admin Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 
@@ -68,7 +68,7 @@
         }
 
         .secret:not(:hover) {
-            filter: blur(0px);
+            filter: blur(2.5px);
             /* Apply a blur filter when not hovering */
         }
     </style>
@@ -93,7 +93,7 @@
                     data-size="large" data-show-count="true"
                     aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a> -->
             </div>
-            <div class="dropdown">
+            <div class="dropdown">  
                 <button id="xUsers" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Hello, John Doe
@@ -130,7 +130,7 @@
 
                             <label for="recipient-name" class="control-label">License:</label>
 
-                            <input type="text" id="licenseid" class="form-control" placeholder="HWID">
+                            <input type="text" id="licenseid" class="form-control" placeholder="HWID" readonly>
 
                         </div>
                         <div class="form-group">
@@ -173,7 +173,7 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">HWID:</label>
-                            <input type="text" class="form-control" placeholder="HWID">
+                            <input type="text" class="form-control" placeholder="HWID" id="hwid">
                         </div>
 
                         <div class="form-group">
@@ -253,6 +253,42 @@
         </div>
     </div>
     <!--end::Modal - Delete all users-->
+<!--begin::Modal - Delete all expired users-->
+<div class="modal fade" tabindex="-1" id="delete-allexpired">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-900px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <h2 class="modal-title">Delete All Expired Users</h2>
+
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+            <div class="modal-body">
+                <label class="fs-5 fw-bold mb-2">
+                    <p> Are you sure you want to delete all expired users? This can not be
+                        undone.</p>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">No</button>
+                <button name="delexpusers" data-bs-dismiss="modal" class="btn btn-danger" onclick="clearAllExpiredUser()">Yes</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal - Delete all expired users-->
 
 
     <div class="container-fluid">
@@ -427,7 +463,7 @@
                                         Unban All Users</button>
                                 </form>
                                 </br>
-
+                                <input type="text" id="filterInput" placeholder="Type to filter">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -456,7 +492,7 @@
                                   <div id="pageButtons">
                                     <!-- Page number buttons will be dynamically added here -->
                                   </div>
-                                <a class="btn btn-block btn-light">View all</a>
+                               <!-- <a class="btn btn-block btn-light">View all</a>-->
                             </div>
                         </div>
                     </div>
@@ -554,7 +590,7 @@
 
 
 
-
+    <script src="../app/script/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
