@@ -23,11 +23,9 @@ var curr_time = "";
 async function getCurrentTime() {
   try {
     const response = await fetch('https://worldtimeapi.org/api/timezone/Asia/Manila');
-
     if (!response.ok) {
       throw new Error('Failed to fetch time data');
     }
-
     const data = await response.json();
 
     // Extract the current time and timezone
@@ -46,7 +44,6 @@ async function getCurrentTime() {
 async function getUsers() {
   try {
     const response = await fetch('https://raw.githubusercontent.com/denverku/sfhacks/main/db2');
-
     if (!response.ok) {
       throw new Error('Failed to fetch users data');
     }
@@ -67,8 +64,6 @@ var notyf = new Notyf();
 function testaw(encodedContent, genlicense) {
 
   //var token = document.getElementById("token").value;
-
-
   // Step 1: Get the current SHA
   fetch(apiUrl, {
     method: "GET",
@@ -251,10 +246,8 @@ button.addEventListener('click', function () {
   var xhwid = document.getElementById("hwid").value;
   if (xhwid == "") {
     notyf.error('You must fill out the hardware id');
-  } else if (isSID(xhwid)) {
+  } else {
     test();
-  }else{
-    notyf.error('Not a valid SID.');
   }
 });
 function generateLicenseKey() {
