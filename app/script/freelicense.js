@@ -20,7 +20,7 @@ dbRef.on("value", function (snapshot) {
 });
 
 var div = document.getElementById('licenseRes');
- // div.style.display = 'none'; // Show the div
+// div.style.display = 'none'; // Show the div
 
 
 var curr_time = "";
@@ -243,6 +243,88 @@ copyButton.addEventListener("click", function () {
 
 });
 
+
+async function generateUser() {
+  try {
+    // Step 1: Get the current SHA
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": `token ${curr_token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const data = await response.json();
+    const sha = data.sha;
+    const content = atob(data.content);
+    const jsonData = JSON.parse(content);
+
+    // Get the current time from the worldtimeapi
+    const timeResponse = await fetch('https://worldtimeapi.org/api/timezone/Asia/Manila');
+
+    if (!timeResponse.ok) {
+      throw new Error('Failed to fetch time data');
+    }
+
+    const timeData = await timeResponse.json();
+    console.log(timeData.datetime);
+
+    var xhwid = document.getElementById("hwid").value;
+    let licenseKey = generateLicenseKey(); // generate license
+
+    let licenseFound = jsonData.Users.some(user => user.pwd === licenseKey);
+
+    if (licenseFound) {
+      throw new Error('Please regenerate again');
+    } else {
+      const currentDate = new Date(timeData.datetime);
+      const daysInMilliseconds = 3 * 60 * 1000; // 3 minutes for testing, adjust as needed
+      currentDate.setTime(currentDate.getTime() + daysInMilliseconds);
+      const newUser = {
+        "pwd": licenseKey,
+        "paid": 0,
+        "ban": false,
+        "subscription": currentDate,
+        "hwid": xhwid
+      };
+      jsonData.Users.push(newUser);
+    }
+
+    // Step 2: Update the content
+    const updatedJsonString = JSON.stringify(jsonData, null, 2);
+    const updateContent = {
+      message: `Update ${new Date()}`,
+      content: btoa(updatedJsonString),
+      sha: sha,
+    };
+
+    const updateResponse = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${curr_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateContent),
+    });
+
+    if (updateResponse.ok) {
+      const label = document.getElementById("license");
+      label.value = licenseKey;
+      notyf.success('License Generated!');
+    } else {
+      notyf.error('Failed to generate license');
+    }
+  } catch (error) {
+    console.error("An error occurred: " + error);
+  }
+}
+
+
 // Find the button element by its ID
 const button = document.getElementById('myButton');
 
@@ -252,7 +334,7 @@ button.addEventListener('click', function () {
   if (xhwid == "") {
     notyf.error('You must fill out the hardware id');
   } else {
-    test();
+    generateUser();
   }
 });
 function generateLicenseKey() {
@@ -277,8 +359,8 @@ function isSID(str) {
 
 function startCountdown() {
 
-  
-  var seconds = 30; // Set the countdown duration in seconds
+
+  var seconds = 1; // Set the countdown duration in seconds
   var button = document.getElementById('myButton');
 
   // Update the button text and disable it initially
