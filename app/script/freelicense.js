@@ -9,7 +9,7 @@ const config = {
 }
 var defaultApp = firebase.initializeApp(config);
 //console.log(defaultApp.name);
-firebase.auth().signInWithEmailAndPassword("sidor@iappstore.cf", "trunks123");
+//firebase.auth().signInWithEmailAndPassword("sidor@iappstore.cf", "trunks123");
 const dbRef = firebase.database().ref().child("AppConfig").child("Token");
 let curr_token = "";
 dbRef.on("value", function (snapshot) {
@@ -18,6 +18,11 @@ dbRef.on("value", function (snapshot) {
   curr_token = tokenValue;
   //console.log("Token value:", tokenValue);
 });
+
+var div = document.getElementById('licenseRes');
+ // div.style.display = 'none'; // Show the div
+
+
 var curr_time = "";
 // Function to fetch and display the current time
 async function getCurrentTime() {
@@ -169,7 +174,7 @@ function test() {
         const expirationDate = new Date(old_subs);
         if (currentDate < expirationDate) {
           notyf.success('License still active!');
-          // Here you can perform actions for items that are still valid
+          //Here you can perform actions for items that are still valid
           const label = document.getElementById("license");
           label.value = licenseKey;
         } else {
@@ -180,7 +185,7 @@ function test() {
           const userIndex = jsonData.Users.findIndex(user => user.pwd === userId);
           if (userIndex !== -1) {
             const currentDate = new Date(curr_time);
-            const oneDayInMilliseconds = 5 * 60 * 1000;
+            const oneDayInMilliseconds = 3 * 60 * 1000;
             currentDate.setTime(currentDate.getTime() + oneDayInMilliseconds);
             console.log(currentDate);
             // User found, update the properties
@@ -197,7 +202,7 @@ function test() {
         }
       } else {
         const currentDate = new Date(curr_time);
-        const oneDayInMilliseconds = 5 * 60 * 1000;
+        const oneDayInMilliseconds = 3 * 60 * 1000;
         currentDate.setTime(currentDate.getTime() + oneDayInMilliseconds);
         const newUser = {
           "pwd": licenseKey,
@@ -269,3 +274,33 @@ const sidRegex = /^S-\d{1,}-\d{1,}-\d{1,}-\d{1,}-\d{1,}$/;
 function isSID(str) {
   return sidRegex.test(str);
 }
+
+function startCountdown() {
+
+  
+  var seconds = 30; // Set the countdown duration in seconds
+  var button = document.getElementById('myButton');
+
+  // Update the button text and disable it initially
+  button.innerText = 'Wait for ' + seconds + ' seconds';
+  button.disabled = true;
+
+  // Function to update the countdown and enable the button
+  function updateCountdown() {
+    seconds--;
+
+    if (seconds > 0) {
+      button.innerText = 'Wait for ' + seconds + ' seconds';
+    } else {
+      button.innerText = 'ACTIVATE';
+      button.disabled = false;
+      clearInterval(interval);
+    }
+  }
+
+  // Set up an interval to update the countdown every second
+  var interval = setInterval(updateCountdown, 1000);
+}
+
+// Call the startCountdown function when the page loads
+window.onload = startCountdown;
