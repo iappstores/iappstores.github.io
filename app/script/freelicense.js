@@ -360,7 +360,7 @@ function isSID(str) {
 function startCountdown() {
 
 
-  var seconds = 1; // Set the countdown duration in seconds
+  var seconds = 30; // Set the countdown duration in seconds
   var button = document.getElementById('myButton');
 
   // Update the button text and disable it initially
