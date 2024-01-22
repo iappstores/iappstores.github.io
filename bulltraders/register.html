@@ -85,13 +85,13 @@
                 var passwordValue = document.getElementById('passInput').value;
                 var passwordCValue = document.getElementById('passCInput').value;
                 var emailValue = document.getElementById('emailInput').value;
-                if (userValue == "") {
+                /*if (userValue == "") {
                     notyf.error('Username cant empty!');
                 }else if (emailValue == "") {
                     notyf.error('Email cant empty!');
                 }else if (passwordValue != passwordCValue) {
     notyf.error('Password not match!');
-  } else {
+  } else {*/
 PlayerIO.authenticate(
     "sticktrader-rkgjftu8memlhjp1g4nbhg",
     "public",                                   //A connection with the authentication type SimpleUsers
@@ -119,7 +119,7 @@ PlayerIO.authenticate(
     }
 );
                 }
-            }
+            //}
             
         </script>
     </body>
