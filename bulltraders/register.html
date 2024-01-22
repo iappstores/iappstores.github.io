@@ -11,7 +11,60 @@
         <link rel="stylesheet" href="css/ab44ce7add5c3d11.css" data-n-g/>
         <link rel="preload" href="css/741e752b716fb869.css" as="style"/>
         <link rel="stylesheet" href="css/741e752b716fb869.css" data-n-p/>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <script src="js/playerio.js"></script>
+        <script type="text/javascript">
+            var notyf = new Notyf();
+            //Fetch a captcha
+/*PlayerIO.quickConnect.simpleGetCaptcha(
+    "[your-game-id-here]", 
+    200,                                    //Image width
+    100,                                    //Image height
+    function (captcha) {
+        var url = captcha.captchaImageUrl;  //Display this in the user registration form
+        var key = captcha.captchaKey;       //Save this for later
+    }, function (error) {
+        console.log(error);
+    }
+);*/
+ 
+ 
+//After the user has submitted the registration form, register a new Simple User:
+            function register() {
+PlayerIO.authenticate(
+    "sticktrader-rkgjftu8memlhjp1g4nbhg",
+    "public",                                   //A connection with the authentication type SimpleUsers
+    {
+        register: "true",
+        username: "sidor",
+        password: "sidor",
+        email: "sidor@gmail.com",
+        captchaKey: "",                        //The captcha key we got earlier
+        captchaValue:"",     //What the user entered
+    },
+    {},
+    function (client) {
+        //Success!
+        //The user is now registered and connected.
+        notyf.success('License Generated!');
+    },
+    function (error) {
+        //Error registering.
+        //Check error.message to find out in what way it failed,
+        //if any registration data was missing or invalid, or if
+        //the entered captcha value didn't match the captcha image.
+        notyf.error('Faield');
+    }
+);
+            }
+            const button = document.getElementById('myButton');
+
+// Add an onclick event listener
+button.addEventListener('click', function () {
+  register();
+});
+        </script>
     </head>
     <body>
         <div id="__next">
@@ -43,14 +96,14 @@
                             </div>
                            
                             <div class="Signup_formGroup__0S0DZ">
-                                <button class="Signup_SignUpBtn__r_sv5">REGISTER</button>
+                                <button id="myButton" class="Signup_SignUpBtn__r_sv5">REGISTER</button>
                             </div>
                             <div class="Signup_textWrapper2__4J0ZW">
                                 <span class="Signup_textSignup__R5ju5">Already have an account?
                                 <!-- -->
                                 </span>
                                 <a href="/login">
-                                    <button class="Signup_signupBtn__kUAJp">Sign In</button>
+                                    <button  class="Signup_signupBtn__kUAJp">Sign In</button>
                                 </a>
                             </div>
                             <div id="cf-turnstile" style="width:300px;height:65px"></div>
