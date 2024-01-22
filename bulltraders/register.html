@@ -102,7 +102,7 @@ PlayerIO.authenticate(
         //Check error.message to find out in what way it failed,
         //if any registration data was missing or invalid, or if
         //the entered captcha value didn't match the captcha image.
-        notyf.error('Faield');
+        notyf.error('Failed: ' + error.message);
     }
 );
             }
