@@ -28,19 +28,19 @@
                             </div>
                             <div class="Signup_formGroup__0S0DZ">
                                 <div class="Signup_textTitle__vML5z">USERNAME</div>
-                                <input placeholder="Username" maxLength="16" type="text" class="Signup_textField__XyCNw" required/>
+                                <input placeholder="Username" maxLength="16" type="text" id="userInput" class="Signup_textField__XyCNw" required/>
                             </div>
                             <div class="Signup_formGroup__0S0DZ">
                                 <div class="Signup_textTitle__vML5z">PASSWORD</div>
-                                <input placeholder="Password" maxLength="16" type="password" class="Signup_textField__XyCNw" required/>
+                                <input placeholder="Password" maxLength="16" type="password" id="passInput" class="Signup_textField__XyCNw" required/>
                             </div>
                             <div class="Signup_formGroup__0S0DZ">
                                 <div class="Signup_textTitle__vML5z">VERIFY PASSWORD</div>
-                                <input placeholder="Re-type password" maxLength="16" type="password" class="Signup_textField__XyCNw" required/>
+                                <input placeholder="Re-type password" maxLength="16" type="password" id="passCInput" class="Signup_textField__XyCNw" required/>
                             </div>
                             <div class="Signup_formGroup__0S0DZ">
                                 <div class="Signup_textTitle__vML5z">EMAIL ADDRESS</div>
-                                <input placeholder="Email address" type="email" class="Signup_textField__XyCNw" required/>
+                                <input placeholder="Email address" type="email" id="emailInput" class="Signup_textField__XyCNw" required/>
                             </div>
                            
                             <div class="Signup_formGroup__0S0DZ">
@@ -81,14 +81,22 @@
  
 //After the user has submitted the registration form, register a new Simple User:
             function register() {
+                var userValue = document.getElementById('userInput').value;
+                var passwordValue = document.getElementById('passInput').value;
+                var passwordCValue = document.getElementById('passCInput').value;
+                var emailValue = document.getElementById('emailInput').value;
+
+                if (passwordValue == passwordCValue) {
+    notyf.error('Password not match!');
+  } else {
 PlayerIO.authenticate(
     "sticktrader-rkgjftu8memlhjp1g4nbhg",
     "public",                                   //A connection with the authentication type SimpleUsers
     {
         register: "true",
-        username: "sidor",
-        password: "sidor",
-        email: "sidor@gmail.com",
+        username: userValue,
+        password: passwordValue,
+        email: emailValue,
         captchaKey: "",                        //The captcha key we got earlier
         captchaValue:"",     //What the user entered
     },
@@ -107,6 +115,7 @@ PlayerIO.authenticate(
         notyf.error('Failed: ' + error.message);
     }
 );
+                }
             }
             const button = document.getElementById('myButton');
 
