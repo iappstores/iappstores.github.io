@@ -63,7 +63,69 @@
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script src="js/playerio.js"></script>
         <script type="text/javascript">
-            function _0x31b7(_0x48f297,_0x508259){var _0x5d6eb2=_0x5d6e();return _0x31b7=function(_0x31b7b,_0x3f2b9e){_0x31b7b=_0x31b7b-0x148;var _0x416bca=_0x5d6eb2[_0x31b7b];return _0x416bca;},_0x31b7(_0x48f297,_0x508259);}var _0x22999c=_0x31b7;(function(_0x4ae644,_0x183248){var _0x5424ff=_0x31b7,_0x3537f4=_0x4ae644();while(!![]){try{var _0x10dc72=parseInt(_0x5424ff(0x153))/0x1*(parseInt(_0x5424ff(0x167))/0x2)+-parseInt(_0x5424ff(0x15c))/0x3+parseInt(_0x5424ff(0x164))/0x4+-parseInt(_0x5424ff(0x14d))/0x5*(-parseInt(_0x5424ff(0x161))/0x6)+-parseInt(_0x5424ff(0x168))/0x7+-parseInt(_0x5424ff(0x160))/0x8*(parseInt(_0x5424ff(0x159))/0x9)+parseInt(_0x5424ff(0x155))/0xa;if(_0x10dc72===_0x183248)break;else _0x3537f4['push'](_0x3537f4['shift']());}catch(_0x2c38f5){_0x3537f4['push'](_0x3537f4['shift']());}}}(_0x5d6e,0x2d3d2));var notyf=new Notyf();function _0x5d6e(){var _0x11723b=['320560rQTXnJ','156zVJJPy','Email\x20cant','nbhg','24312gEEZqn','userInput','ById','60erIBgY','421561tnbkat','piRequests','value','useSecureA','Password\x20n','message','memlhjp1g4','26295YQPRBH','getElement','true','r-rkgjftu8','nerated!','ot\x20match!','11758vuoVzq','error','100040evxbvd','Failed:\x20','log','emailInput','18uovQaj','License\x20Ge','Username\x20c','539685iWiGfh','sticktrade','\x20empty!','authentica'];_0x5d6e=function(){return _0x11723b;};return _0x5d6e();}PlayerIO[_0x22999c(0x149)+_0x22999c(0x169)]=!![];function register(){var _0x5d8270=_0x22999c,_0x4b5cea=document['getElement'+_0x5d8270(0x166)](_0x5d8270(0x165))[_0x5d8270(0x148)],_0x188d04=document[_0x5d8270(0x14e)+_0x5d8270(0x166)]('passInput')[_0x5d8270(0x148)],_0x19f25d=document[_0x5d8270(0x14e)+'ById']('passCInput')[_0x5d8270(0x148)],_0x29840c=document['getElement'+_0x5d8270(0x166)](_0x5d8270(0x158))[_0x5d8270(0x148)];if(_0x4b5cea=='')notyf[_0x5d8270(0x154)](_0x5d8270(0x15b)+'ant\x20empty!');else{if(_0x29840c=='')notyf[_0x5d8270(0x154)](_0x5d8270(0x162)+_0x5d8270(0x15e));else _0x188d04==_0x19f25d?notyf['error'](_0x5d8270(0x14a)+_0x5d8270(0x152)):PlayerIO[_0x5d8270(0x15f)+'te'](_0x5d8270(0x15d)+_0x5d8270(0x150)+_0x5d8270(0x14c)+_0x5d8270(0x163),'public',{'register':_0x5d8270(0x14f),'username':_0x4b5cea,'password':_0x188d04,'email':_0x29840c,'captchaKey':'','captchaValue':''},{},function(_0x20b428){var _0x7ba38f=_0x5d8270;notyf['success'](_0x7ba38f(0x15a)+_0x7ba38f(0x151));},function(_0x58affd){var _0x45a687=_0x5d8270;console[_0x45a687(0x157)]('Failed:\x20'+_0x58affd['message']),notyf[_0x45a687(0x154)](_0x45a687(0x156)+_0x58affd[_0x45a687(0x14b)]);});}}
+            var notyf = new Notyf();
+            PlayerIO.useSecureApiRequests = true;
+            //Fetch a captcha
+/*PlayerIO.quickConnect.simpleGetCaptcha(
+    "[your-game-id-here]", 
+    200,                                    //Image width
+    100,                                    //Image height
+    function (captcha) {
+        var url = captcha.captchaImageUrl;  //Display this in the user registration form
+        var key = captcha.captchaKey;       //Save this for later
+    }, function (error) {
+        console.log(error);
+    }
+);*/
+ 
+ 
+//After the user has submitted the registration form, register a new Simple User:
+            function register() {
+                var userValue = document.getElementById('userInput').value;
+                var passwordValue = document.getElementById('passInput').value;
+                var passwordCValue = document.getElementById('passCInput').value;
+                var emailValue = document.getElementById('emailInput').value;
+                if (userValue == "") {
+                    notyf.error('Username cant empty!');
+                }else if (emailValue == "") {
+                    notyf.error('Email cant empty!');
+                }else if (passwordValue == passwordCValue) {
+    notyf.error('Password not match!');
+  } else {
+PlayerIO.authenticate(
+    "sticktrader-rkgjftu8memlhjp1g4nbhg",
+    "public",                                   //A connection with the authentication type SimpleUsers
+    {
+        register: "true",
+        username: userValue,
+        password: passwordValue,
+        email: emailValue,
+        captchaKey: "",                        //The captcha key we got earlier
+        captchaValue:"",     //What the user entered
+    },
+    {},
+    function (client) {
+        //Success!
+        //The user is now registered and connected.
+        notyf.success('License Generated!');
+    },
+    function (error) {
+        //Error registering.
+        //Check error.message to find out in what way it failed,
+        //if any registration data was missing or invalid, or if
+        //the entered captcha value didn't match the captcha image.
+        console.log('Failed: ' + error.message);
+        notyf.error('Failed: ' + error.message);
+    }
+);
+                }
+            }
+            const button = document.getElementById('myButton');
+
+// Add an onclick event listener
+button.addEventListener('click', function () {
+  register();
+});
         </script>
     </body>
 </html>
