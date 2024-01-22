@@ -89,7 +89,7 @@
                     notyf.error('Username cant empty!');
                 }else if (emailValue == "") {
                     notyf.error('Email cant empty!');
-                }else if (passwordValue == passwordCValue) {
+                }else if (passwordValue != passwordCValue) {
     notyf.error('Password not match!');
   } else {
 PlayerIO.authenticate(
