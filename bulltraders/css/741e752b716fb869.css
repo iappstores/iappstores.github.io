@@ -1,0 +1,305 @@
+.Signup_SignUpContainer__eFsYq {
+    background-color: #010101;
+    height: 100%;
+    width: 100%;
+    overflow: hidden
+}
+
+.Signup_SignUpBox__Mj1ia {
+    display: flex;
+    height: 100vh
+}
+
+.Signup_SignUpLeftBg__VkOZK {
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none
+}
+
+.Signup_registerContanier__blvG8 {
+    height: 100%;
+    width: 100%;
+    padding: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto
+}
+
+.Signup_registerBox__eolqc {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.Signup_textWrapper1__AzBYS {
+    color: #fff;
+    font-family: Inter,Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    margin-bottom: 40px;
+    text-align: center
+}
+
+.Signup_SignUpText1__GgrQI {
+    color: #fff;
+    font-weight: 700
+}
+
+.Signup_SignUpText2__MpnsU {
+    color: #606060;
+    font-weight: 500
+}
+
+.Signup_formGroup__0S0DZ {
+    height: 115px;
+    width: 70%
+}
+
+.Signup_textTitle__vML5z {
+    font-family: Inter,Helvetica;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.Signup_textField__XyCNw,.Signup_textTitle__vML5z {
+    color: #a7a8bc;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: normal
+}
+
+.Signup_textField__XyCNw {
+    font-family: Inter,Helvetica!important;
+    font-weight: 500;
+    background-color: #202020;
+    width: 100%;
+    height: 50px;
+    border: 2px solid #353535;
+    padding: 15px;
+    transition: .5s ease .1s
+}
+
+.Signup_textField__XyCNw:focus {
+    outline: none;
+    border: 2px solid #555;
+    transition: .5s ease .15s
+}
+
+.Signup_SignUpBtn__r_sv5 {
+    font-family: Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #28aaf3;
+    text-transform: uppercase;
+    transition: .5s ease .1s;
+    border: none;
+    width: 100%;
+    height: 52px
+}
+
+.Signup_SignUpBtn__r_sv5:hover {
+    transition: .5s ease .15s;
+    font-family: Helvetica;
+    font-weight: 700;
+    color: #fff;
+    background-color: #50c0fe;
+    box-shadow: 0 0 10px 2px #50c0fe80;
+    cursor: pointer
+}
+
+.Signup_SignUpBtn__r_sv5:disabled {
+    color: #a3a3a3;
+    background-color: #555;
+    box-shadow: 0 0 14px 0 rgba(85,85,85,.5),0 0 23px 0 rgba(85,85,85,.5)
+}
+
+.Signup_signupBtn__kUAJp {
+    color: #28aaf3;
+    background-color: transparent;
+    border: none;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    transition: .5s ease .1s
+}
+
+.Signup_signupBtn__kUAJp:hover {
+    color: #50c0fe;
+    cursor: pointer;
+    transition: .5s ease .15s
+}
+
+.Signup_textWrapper2__4J0ZW {
+    color: transparent;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center
+}
+
+.Signup_textSignup__R5ju5 {
+    color: #a7a8bc
+}
+
+.Signup_alertBox__yOx3m {
+    background-color: #2ba2db;
+    width: 70%;
+    height: 70px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.Signup_alertTitle__tY06S {
+    font-size: 16px;
+    font-family: Inter,Helvetica;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase
+}
+
+.Signup_alertText__ENZxn {
+    font-size: 14px
+}
+
+.Signup_alertText__ENZxn,.Signup_loadingText__f6_Xc {
+    font-family: Inter,Helvetica;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center
+}
+
+.Signup_loadingText__f6_Xc {
+    font-size: 16px
+}
+
+.Signup_createAccountIcon__LojXd {
+    margin-top: 200px
+}
+
+.Signup_createAccountTitle__pUNiT {
+    text-transform: uppercase
+}
+
+.Signup_createAccountText1__6_aLL,.Signup_createAccountTitle__pUNiT {
+    color: #fff;
+    font-family: Inter,Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap
+}
+
+.Signup_createAccountTextWrapper1___Vy2t {
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center
+}
+
+.Signup_createAccountText__kVx_1 {
+    color: #fff;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.Signup_resendBtn__MhzRo {
+    color: #2ba2db;
+    background-color: transparent;
+    border: none;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    transition: .5s ease .1s
+}
+
+.Signup_resendBtn__MhzRo:hover {
+    color: #50c0fe;
+    cursor: pointer;
+    transition: .5s ease .15s
+}
+
+.Signup_resendBtn__MhzRo:disabled {
+    color: grey;
+    cursor: not-allowed
+}
+
+.Signup_changeEmailBox__XPd2d {
+    padding-top: 20vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+@media only screen and (max-width: 1440px) {
+    .Signup_SignUpLeftBg__VkOZK {
+        height:0%;
+        width: 50%;
+        object-fit: contain;
+        pointer-events: none
+    }
+
+    .Signup_registerBox__eolqc {
+        width: 100%
+    }
+}
+
+@media only screen and (max-width: 1355px) {
+    .Signup_SignUpLeftBg__VkOZK {
+        display:none
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .Signup_registerContaier__VohtO {
+        margin-top:120px;
+        padding: unset
+    }
+
+    .Signup_registerContanier__blvG8 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 0
+    }
+
+    .Signup_registerBox__eolqc {
+        width: 100%
+    }
+
+    .Signup_createAccountTitle__pUNiT {
+        font-size: 6vw
+    }
+
+    .Signup_createAccountText__kVx_1,.Signup_resendBtn__MhzRo {
+        font-size: 3vw
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .Signup_textWrapper1__AzBYS {
+        font-size:16px
+    }
+}
