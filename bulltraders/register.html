@@ -85,8 +85,11 @@
                 var passwordValue = document.getElementById('passInput').value;
                 var passwordCValue = document.getElementById('passCInput').value;
                 var emailValue = document.getElementById('emailInput').value;
-
-                if (passwordValue == passwordCValue) {
+                if (userValue == "") {
+                    notyf.error('Username cant empty!');
+                }else if (emailValue == "") {
+                    notyf.error('Email cant empty!');
+                }else if (passwordValue == passwordCValue) {
     notyf.error('Password not match!');
   } else {
 PlayerIO.authenticate(
